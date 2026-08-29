@@ -15,11 +15,14 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "АвтоМентор | Професійний викладач ПДР",
-  description: "Ефективне вивчення правил дорожнього руху. Індивідуальний підхід та сучасні методики. Забронюйте перший безкоштовний урок!",
+  title: {
+    template: "%s | АвтоМентор",
+    default: "АвтоМентор | Професійне навчання правилам дорожнього руху",
+  },
+  description: "Індивідуальні заняття з ПДР. Зрозумійте правила та станьте експертом теорії.",
   openGraph: {
     title: "АвтоМентор | Професійний викладач ПДР",
-    description: "Індивідуальні заняття з ПДР та практичного водіння. Подолайте страх дороги та станьте безпечним водієм.",
+    description: "Індивідуальні заняття з ПДР. Зрозумійте правила та станьте експертом теорії.",
     url: "https://automenter.example.com",
     siteName: "АвтоМентор",
     locale: "uk_UA",
@@ -28,9 +31,11 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "АвтоМентор | Професійний викладач ПДР",
-    description: "Індивідуальні заняття з ПДР та практичного водіння. Перший безкоштовний урок!",
+    description: "Індивідуальні заняття з ПДР. Перший безкоштовний урок!",
   }
 };
+
+import AmbientBackground from "@/components/animations/AmbientBackground";
 
 export default function RootLayout({
   children,
@@ -40,6 +45,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={`${inter.variable} ${outfit.variable}`}>
+        <AmbientBackground />
         <Navbar />
         <main>{children}</main>
         <Footer />

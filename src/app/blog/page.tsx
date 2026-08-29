@@ -4,8 +4,8 @@ import { getSortedPostsData } from "@/lib/posts";
 import "./blog.css";
 
 export const metadata: Metadata = {
-  title: "Блог про водіння | АвтоМентор",
-  description: "Корисні поради, розбір ПДР та секрети безпечного водіння.",
+  title: "Блог про ПДР | АвтоМентор",
+  description: "Корисні поради, розбір ПДР та секрети успішного складання іспитів.",
 };
 
 export default function Blog() {
@@ -17,7 +17,7 @@ export default function Blog() {
         <div className="text-center">
           <h1 className="section-title">Блог та корисні поради</h1>
           <p className="blog-subtitle">
-            Статті про правила дорожнього руху, психологію водіння та підготовку до іспитів.
+            Статті про правила дорожнього руху, лайфхаки для запам'ятовування та підготовку до іспитів.
           </p>
         </div>
 

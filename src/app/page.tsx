@@ -1,4 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
+import FadeUp from "@/components/animations/FadeUp";
+import HoverCard from "@/components/animations/HoverCard";
 import "./home.css";
 
 export default function Home() {
@@ -8,44 +11,65 @@ export default function Home() {
       <section className="hero-section">
         <div className="container hero-container">
           <div className="hero-content">
-            <h1 className="hero-title">
-              Впевненість за кермом починається з <span>правильного наставника</span>
-            </h1>
-            <p className="hero-subtitle">
-              Індивідуальні заняття з ПДР та практичного водіння. Подолайте страх дороги, підготуйтеся до іспитів та станьте безпечним водієм разом зі мною.
-            </p>
-            <div className="hero-cta">
-              <Link href="/booking" className="btn btn-primary btn-large cta-pulse">
-                Забронювати безкоштовний 30-хв урок
-              </Link>
-              <p className="cta-subtext">Познайомимось, оцінимо ваш рівень та складемо план навчання.</p>
-            </div>
+            <FadeUp delay={0.1}>
+              <h1 className="hero-title">
+                Ідеальне знання ПДР починається з <span>правильного наставника</span>
+              </h1>
+            </FadeUp>
+            <FadeUp delay={0.3}>
+              <p className="hero-subtitle">
+                Індивідуальні заняття з Правил дорожнього руху. Зрозумійте логіку ПДР, підготуйтеся до теоретичного іспиту без зазубрювання та станьте експертом теорії разом зі мною.
+              </p>
+            </FadeUp>
+            <FadeUp delay={0.5}>
+              <div className="hero-cta">
+                <Link href="/booking" className="btn btn-primary btn-large cta-pulse inline-block">
+                  Забронювати безкоштовний 30-хв урок
+                </Link>
+                <p className="cta-subtext">Познайомимось, оцінимо ваш рівень та складемо план навчання.</p>
+              </div>
+            </FadeUp>
           </div>
-          <div className="hero-image-wrapper">
-            <div className="hero-image-placeholder glass">
-              <span className="placeholder-text">[ Фото викладача за кермом або біля авто ]</span>
+          <FadeUp delay={0.4}>
+            <div className="hero-image-wrapper">
+              <Image 
+                src="/instructor.jpg" 
+                alt="Фото викладача" 
+                width={500} 
+                height={600} 
+                className="hero-image"
+                priority
+              />
             </div>
-          </div>
+          </FadeUp>
         </div>
       </section>
 
       {/* Features Section */}
       <section className="section features-section">
         <div className="container">
-          <h2 className="section-title text-center">Чому обирають мої заняття?</h2>
+          <FadeUp>
+            <h2 className="section-title text-center">Чому обирають мої заняття?</h2>
+          </FadeUp>
           <div className="features-grid">
-            <div className="feature-card glass">
-              <h3>🚗 Індивідуальний підхід</h3>
-              <p>Навчання адаптується під ваш рівень: від абсолютного нуля до вдосконалення навичок після довгої перерви.</p>
-            </div>
-            <div className="feature-card glass">
-              <h3>🧘‍♂️ Без стресу та крику</h3>
-              <p>Спокійна атмосфера на заняттях. Моя мета — зробити так, щоб ви відчували себе комфортно за кермом.</p>
-            </div>
-            <div className="feature-card glass">
-              <h3>🎯 Підготовка до іспитів</h3>
-              <p>Відпрацювання екзаменаційних маршрутів Сервісних центрів МВС. Аналіз типових помилок.</p>
-            </div>
+            <FadeUp delay={0.1}>
+              <HoverCard className="feature-card glass h-full">
+                <h3>🚗 Індивідуальний підхід</h3>
+                <p>Навчання адаптується під ваш рівень: від абсолютного нуля до впевненого знання кожного знаку та правила.</p>
+              </HoverCard>
+            </FadeUp>
+            <FadeUp delay={0.2}>
+              <HoverCard className="feature-card glass h-full">
+                <h3>🧘‍♂️ Без стресу та крику</h3>
+                <p>Спокійна атмосфера на заняттях. Моя мета — зробити так, щоб ви відчували себе впевнено на теоретичному іспиті.</p>
+              </HoverCard>
+            </FadeUp>
+            <FadeUp delay={0.3}>
+              <HoverCard className="feature-card glass h-full">
+                <h3>🎯 Підготовка до іспитів</h3>
+                <p>Розбір екзаменаційних білетів Головного сервісного центру МВС. Аналіз складних перехресть на схемах та типових помилок.</p>
+              </HoverCard>
+            </FadeUp>
           </div>
         </div>
       </section>
@@ -53,11 +77,13 @@ export default function Home() {
       {/* Final CTA Section */}
       <section className="section final-cta-section">
         <div className="container text-center">
-          <h2>Готові зробити перший крок?</h2>
-          <p>Не відкладайте свою безпеку та свободу пересування на потім.</p>
-          <Link href="/booking" className="btn btn-secondary btn-large">
-            Спробувати безкоштовно
-          </Link>
+          <FadeUp>
+            <h2>Готові зробити перший крок?</h2>
+            <p>Не відкладайте свою безпеку та свободу пересування на потім.</p>
+            <Link href="/booking" className="btn btn-secondary btn-large mt-4 inline-block">
+              Спробувати безкоштовно
+            </Link>
+          </FadeUp>
         </div>
       </section>
     </div>
