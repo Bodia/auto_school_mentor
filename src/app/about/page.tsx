@@ -29,13 +29,13 @@ export default function About() {
 
             <div className="stats-grid">
               <div className="stat-card glass">
-                <div className="stat-number">5+</div>
+                <div className="stat-number">20+</div>
                 <div className="stat-label">Років викладання</div>
               </div>
               <div className="stat-card glass">
-                <div className="stat-number">300+</div>
-                <div className="stat-label">Успішних учнів</div>
-              </div>
+          <div className="stat-number">3000+</div>
+          <div className="stat-label">Успішних учнів</div>
+        </div>
               <div className="stat-card glass">
                 <div className="stat-number">100%</div>
                 <div className="stat-label">Індивідуальний підхід</div>

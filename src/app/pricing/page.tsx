@@ -46,7 +46,7 @@ export default function Pricing() {
           <FadeUp delay={0.2}>
             <HoverCard className="pricing-card glass h-full">
               <h3 className="card-title">Індивідуальний урок з ПДР</h3>
-              <div className="card-price">800 грн<span>/ 60 хв</span></div>
+              <div className="card-price">250 грн<span>/ 60 хв</span></div>
               <p className="card-desc">Повноцінне заняття з розбору правил та дорожніх ситуацій.</p>
               <ul className="card-features">
                 <li>Онлайн або офлайн формат</li>
@@ -63,9 +63,9 @@ export default function Pricing() {
           {/* Exam Prep */}
           <FadeUp delay={0.3}>
             <HoverCard className="pricing-card glass h-full">
-              <h3 className="card-title">Інтенсив до теоретичного іспиту</h3>
-              <div className="card-price">1200 грн<span>/ 90 хв</span></div>
-              <p className="card-desc">Цільова підготовка до здачі теорії в СЦ МВС.</p>
+              <h3 className="card-title">Інтенсив (парні заняття)</h3>
+              <div className="card-price">400 грн<span>/ 60 хв</span></div>
+              <p className="card-desc">За 400 грн протягом 60 хв ви можете займатися з партнером або будь‑ким близьким.</p>
               <ul className="card-features">
                 <li>Розбір офіційних білетів</li>
                 <li>Симуляція іспиту</li>
