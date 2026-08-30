@@ -26,7 +26,7 @@ export default function Booking() {
             Наприклад: https://calendly.com/ваше_імя/30min
           */}
           <iframe
-            src="https://calendly.com"
+            src="https://calendly.com/asusgrup24/30min"
             width="100%"
             height="700"
             frameBorder="0"
