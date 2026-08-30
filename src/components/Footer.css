@@ -62,5 +62,19 @@
   .footer-container {
     grid-template-columns: 1fr;
     gap: 2rem;
+    text-align: center;
+  }
+  
+  .footer-brand .logo {
+    display: inline-block;
+    margin: 0 auto 1rem auto;
+  }
+  
+  .footer-desc {
+    margin: 0 auto;
+  }
+  
+  .footer-links {
+    align-items: center;
   }
 }
