@@ -1,7 +1,8 @@
+/* ============ NAVBAR ============ */
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 200;
   padding: 1rem 0;
   border-bottom: 1px solid var(--border);
 }
@@ -18,12 +19,14 @@
   font-weight: 700;
   color: var(--text);
   letter-spacing: -0.5px;
+  text-decoration: none;
 }
 
 .logo span {
   color: var(--primary-color);
 }
 
+/* Desktop nav sits inside the navbar header */
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -32,6 +35,7 @@
 .nav-links a {
   color: var(--text-alt);
   font-weight: 500;
+  text-decoration: none;
 }
 
 .nav-links a:hover {
@@ -42,99 +46,136 @@
   display: block;
 }
 
-.mobile-only {
-  display: none;
-}
-
+/* ============ BURGER BUTTON ============ */
 .mobile-menu-btn {
   display: none;
   background: none;
   border: none;
   color: var(--text);
   cursor: pointer;
-  padding: 0.5rem;
-  z-index: 101;
+  padding: 0.4rem;
+  line-height: 0;
 }
 
+/* ============ MOBILE HIDDEN DESKTOP CLASSES ============ */
+.mobile-backdrop,
+.mobile-drawer {
+  display: none;
+}
+
+/* ============ MOBILE BREAKPOINT ============ */
 @media (max-width: 768px) {
+  /* Hide desktop nav & CTA on mobile */
+  .nav-links {
+    display: none;
+  }
+
   .desktop-only {
     display: none;
   }
-  
-  .mobile-only {
-    display: block;
-    margin-top: 1rem;
-    width: 100%;
-  }
-  
-  .mobile-only .btn {
-    width: 100%;
-    text-align: center;
-  }
 
+  /* Show burger */
   .mobile-menu-btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .nav-links {
+  /* 1) Dark overlay covering the screen */
+  .mobile-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 4000;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .mobile-backdrop.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  /* 2) Side Drawer sliding from right */
+  .mobile-drawer {
+    display: block;
     position: fixed;
     top: 0;
     right: 0;
-    transform: translateX(100%);
-    width: 100%;
-    height: 100vh;
+    bottom: 0;
+    width: 80%;
+    max-width: 350px;
+    z-index: 5000;
     background-color: var(--bg);
-    /* Safely apply glassmorphism */
-    @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2.5rem;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1000; /* Increased z-index to ensure it's above all cards */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   @media (prefers-color-scheme: dark) {
-    .nav-links {
-      background-color: var(--bg);
-      @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
-        background: rgba(15, 23, 42, 0.95);
-      }
+    .mobile-drawer {
+      background-color: var(--background-dark);
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
     }
   }
 
-  .nav-links.active {
+  .mobile-drawer.active {
     transform: translateX(0);
   }
-  
-  .nav-links a:not(.btn) {
-    font-size: 1.75rem;
+
+  /* Close button inside the drawer */
+  .drawer-close-btn {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 10;
+  }
+  .drawer-close-btn:hover {
+    color: var(--primary-color);
+  }
+
+  /* Navigation inside the drawer */
+  .mobile-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 6rem 2rem 2rem; /* top padding to clear close btn */
+    gap: 1.75rem;
+  }
+
+  .mobile-nav a:not(.btn) {
+    font-size: 1.4rem;
     font-family: var(--font-heading);
     font-weight: 700;
     color: var(--text);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.7;
-    transition: all 0.2s ease-in-out;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+    text-decoration: none;
+    transition: opacity 0.2s, color 0.2s;
   }
 
-  .nav-links a:not(.btn):hover {
+  .mobile-nav a:not(.btn):hover {
     opacity: 1;
     color: var(--primary-color);
-    transform: scale(1.05);
   }
 
-  .mobile-only {
-    display: block;
-    margin-top: 2rem;
-    width: 85%;
+  .mobile-nav-cta {
+    margin-top: 1.5rem;
+    width: 100%;
   }
-  
-  .mobile-only .btn {
+
+  .mobile-nav-cta .btn {
     width: 100%;
     text-align: center;
     padding: 1rem;
