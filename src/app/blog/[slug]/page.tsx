@@ -35,12 +35,12 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
   return (
     <div className="section">
-      <div className="container" style={{ maxWidth: '800px' }}>
+      <div className="container blog-post-container">
         <Link href="/blog" className="back-link">
           ← Повернутися до всіх статей
         </Link>
         
-        <article className="glass" style={{ padding: '3rem', borderRadius: '24px' }}>
+        <article className="glass blog-post-article">
           <header className="post-header">
             <h1 className="post-title">{postData.title}</h1>
             <div className="blog-date">{postData.date}</div>
