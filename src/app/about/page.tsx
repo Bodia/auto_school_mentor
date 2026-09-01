@@ -8,8 +8,22 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "АвтоМентор",
+    "jobTitle": "Сертифікований викладач ПДР",
+    "description": "Сертифікований викладач з індивідуального вивчення теорії ПДР. Понад 20 років досвіду.",
+    "url": "https://automenter.example.com/about",
+    "sameAs": []
+  };
+
   return (
     <div className="about-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container about-container section">
         <h1 className="section-title text-center">Про викладача</h1>
         

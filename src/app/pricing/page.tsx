@@ -10,8 +10,45 @@ export const metadata: Metadata = {
 };
 
 export default function Pricing() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Формати навчання ПДР",
+    "description": "Ціни та пакети на індивідуальні заняття з ПДР",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "position": 1,
+        "name": "Знайомство",
+        "price": "0",
+        "priceCurrency": "UAH",
+        "description": "Перше 30-хвилинне заняття-знайомство безкоштовно"
+      },
+      {
+        "@type": "Offer",
+        "position": 2,
+        "name": "Індивідуальний урок з ПДР",
+        "price": "250",
+        "priceCurrency": "UAH",
+        "description": "Повноцінне заняття з розбору правил (60 хв)"
+      },
+      {
+        "@type": "Offer",
+        "position": 3,
+        "name": "Інтенсив (парні заняття)",
+        "price": "400",
+        "priceCurrency": "UAH",
+        "description": "Парне заняття протягом півтори години (90 хв)"
+      }
+    ]
+  };
+
   return (
     <div className="pricing-page section">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div className="container">
         <FadeUp>
           <div className="pricing-header text-center">

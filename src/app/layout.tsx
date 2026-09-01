@@ -15,14 +15,24 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://automenter.example.com"),
   title: {
     template: "%s | АвтоМентор",
-    default: "АвтоМентор | Професійне навчання правилам дорожнього руху",
+    default: "АвтоМентор | Професійне навчання правилам дорожнього руху (ПДР)",
   },
-  description: "Індивідуальні заняття з ПДР. Зрозумійте правила та станьте експертом теорії.",
+  description: "Індивідуальні заняття з ПДР онлайн. Зрозумійте правила дорожнього руху та станьте експертом теорії з АвтоМентором. Підготовка до іспиту з ПДР в Україні.",
+  keywords: ["АвтоМентор", "ПДР", "правила дорожнього руху", "навчання ПДР", "автошкола", "теорія водіння", "іспит ПДР", "індивідуальні заняття ПДР", "онлайн навчання", "підготовка до іспиту"],
+  authors: [{ name: "АвтоМентор" }],
+  creator: "АвтоМентор",
+  publisher: "АвтоМентор",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: "АвтоМентор | Професійний викладач ПДР",
-    description: "Індивідуальні заняття з ПДР. Зрозумійте правила та станьте експертом теорії.",
+    description: "Індивідуальні заняття з ПДР онлайн. Зрозумійте правила дорожнього руху та станьте експертом теорії з АвтоМентором.",
     url: "https://automenter.example.com",
     siteName: "АвтоМентор",
     locale: "uk_UA",
@@ -32,7 +42,18 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "АвтоМентор | Професійний викладач ПДР",
     description: "Індивідуальні заняття з ПДР. Перший безкоштовний урок!",
-  }
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 import AmbientBackground from "@/components/animations/AmbientBackground";
@@ -42,9 +63,36 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Structured Data for AI bots (ChatGPT, Gemini, Google Search)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "АвтоМентор",
+    "description": "Професійне індивідуальне навчання правилам дорожнього руху (ПДР) онлайн.",
+    "url": "https://automenter.example.com",
+    "logo": "https://automenter.example.com/favicon.ico",
+    "foundingLocation": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "UA"
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "UAH",
+      "name": "Безкоштовний перший урок ПДР"
+    }
+  };
+
   return (
     <html lang="uk">
       <body className={`${inter.variable} ${outfit.variable}`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <AmbientBackground />
         <Navbar />
         <main>{children}</main>
