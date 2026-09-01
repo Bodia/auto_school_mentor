@@ -130,8 +130,11 @@
     border-radius: 16px;
   }
   .blog-post-article {
-    padding: 1.25rem;
-    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    margin: 0;
   }
   .post-header {
     margin-bottom: 1.5rem;
