@@ -107,5 +107,24 @@
 @media (max-width: 768px) {
   .pricing-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem; /* slightly more gap to account for hovering/badge */
+  }
+
+  .pricing-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .card-price {
+    font-size: 2.5rem;
+  }
+
+  .card-badge {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+  }
+  
+  .pricing-subtitle {
+    font-size: 1.1rem;
+    padding: 0 1rem;
   }
 }
