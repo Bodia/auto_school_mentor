@@ -56,6 +56,9 @@ export const metadata: Metadata = {
   },
 };
 
+import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import '@mantine/core/styles.css';
+
 import AmbientBackground from "@/components/animations/AmbientBackground";
 
 export default function RootLayout({
@@ -88,15 +91,20 @@ export default function RootLayout({
 
   return (
     <html lang="uk">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className={`${inter.variable} ${outfit.variable}`}>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        <AmbientBackground />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <MantineProvider defaultColorScheme="auto">
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          />
+          <AmbientBackground />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </MantineProvider>
       </body>
     </html>
   );
