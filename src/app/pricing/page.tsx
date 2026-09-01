@@ -64,8 +64,8 @@ export default function Pricing() {
           <FadeUp delay={0.3}>
             <HoverCard className="pricing-card glass h-full">
               <h3 className="card-title">Інтенсив (парні заняття)</h3>
-              <div className="card-price">400 грн<span>/ 60 хв</span></div>
-              <p className="card-desc">За 400 грн протягом 60 хв ви можете займатися з партнером або будь‑ким близьким.</p>
+              <div className="card-price">400 грн<span>/ 90 хв</span></div>
+              <p className="card-desc">За 400 грн протягом півтори години ви можете займатися з партнером або будь‑ким близьким.</p>
               <ul className="card-features">
                 <li>Розбір офіційних білетів</li>
                 <li>Симуляція іспиту</li>
@@ -75,6 +75,26 @@ export default function Pricing() {
               <Link href="/booking" className="btn btn-outline w-full mt-auto">
                 Забронювати
               </Link>
+            </HoverCard>
+          </FadeUp>
+
+          {/* All Inclusive */}
+          <FadeUp delay={0.4}>
+            <HoverCard className="pricing-card glass h-full">
+              <h3 className="card-title">All Inclusive</h3>
+              <div className="card-price" style={{ fontSize: '1.5rem', marginTop: '1rem', marginBottom: '1.5rem' }}>
+                Скоро буде доступне
+              </div>
+              <p className="card-desc">Повний супровід від початку навчання до успішного складання іспиту в СЦ МВС.</p>
+              <ul className="card-features">
+                <li>Безлімітні консультації</li>
+                <li>Індивідуальний графік</li>
+                <li>Пріоритетне бронювання</li>
+                <li>Додаткові матеріали</li>
+              </ul>
+              <button className="btn btn-outline w-full mt-auto" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                Очікується
+              </button>
             </HoverCard>
           </FadeUp>
         </div>
