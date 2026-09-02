@@ -58,6 +58,14 @@ export default function Navbar() {
             </svg>
           </button>
 
+          <nav className="nav-links desktop-only">
+            <Link href="/about">Про мене</Link>
+            <Link href="/pricing">Послуги та ціни</Link>
+            <Link href="/reviews">Відгуки</Link>
+            <Link href="/blog">Блог</Link>
+            <Link href="/quiz" className="highlight-link">Пройти тест</Link>
+          </nav>
+
           <div className="nav-cta desktop-only">
             <Link href="/booking" className="btn btn-primary">
               Безкоштовний урок
@@ -93,6 +101,7 @@ export default function Navbar() {
           <Link href="/pricing" onClick={closeMenu}>Послуги та ціни</Link>
           <Link href="/reviews" onClick={closeMenu}>Відгуки</Link>
           <Link href="/blog" onClick={closeMenu}>Блог</Link>
+          <Link href="/quiz" onClick={closeMenu} className="highlight-link">Пройти тест</Link>
 
           <div className="mobile-nav-cta">
             <Link href="/booking" className="btn btn-primary" onClick={closeMenu}>

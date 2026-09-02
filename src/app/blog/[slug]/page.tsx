@@ -35,7 +35,6 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
 
   return (
     <div className="section">
-    <div className="section">
       <div>
         <div className="container" style={{maxWidth: "1000px"}}>
             <Link href="/blog" className="back-link">

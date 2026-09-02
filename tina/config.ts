@@ -61,6 +61,76 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "pricing",
+        label: "Тарифні плани",
+        path: "pricing",
+        format: "md",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Назва тарифу",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "price",
+            label: "Ціна",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "duration",
+            label: "Тривалість (напр. '/ 60 хв')",
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Опис",
+          },
+          {
+            type: "string",
+            name: "features",
+            label: "Переваги",
+            list: true,
+          },
+          {
+            type: "string",
+            name: "badge",
+            label: "Бейдж (напр. 'Найкращий старт')",
+          },
+          {
+            type: "string",
+            name: "buttonText",
+            label: "Текст кнопки",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "buttonLink",
+            label: "Посилання кнопки",
+          },
+          {
+            type: "string",
+            name: "buttonVariant",
+            label: "Стиль кнопки",
+            options: ["primary", "outline"],
+          },
+          {
+            type: "boolean",
+            name: "disabled",
+            label: "Кнопка неактивна?",
+          },
+          {
+            type: "number",
+            name: "order",
+            label: "Порядок відображення",
+            required: true,
+          },
+        ],
+      },
     ],
   },
 });

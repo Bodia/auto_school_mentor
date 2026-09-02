@@ -90,7 +90,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="uk">
+    <html lang="uk" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
       </head>

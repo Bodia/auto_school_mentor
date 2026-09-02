@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import FadeUp from "@/components/animations/FadeUp";
 import HoverCard from "@/components/animations/HoverCard";
+import { getSortedPricingData } from "@/lib/pricing";
 import "./pricing.css";
 
 export const metadata: Metadata = {
@@ -10,37 +11,21 @@ export const metadata: Metadata = {
 };
 
 export default function Pricing() {
+  const allPricingData = getSortedPricingData();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "Формати навчання ПДР",
     "description": "Ціни та пакети на індивідуальні заняття з ПДР",
-    "itemListElement": [
-      {
-        "@type": "Offer",
-        "position": 1,
-        "name": "Знайомство",
-        "price": "0",
-        "priceCurrency": "UAH",
-        "description": "Перше 30-хвилинне заняття-знайомство безкоштовно"
-      },
-      {
-        "@type": "Offer",
-        "position": 2,
-        "name": "Індивідуальний урок з ПДР",
-        "price": "250",
-        "priceCurrency": "UAH",
-        "description": "Повноцінне заняття з розбору правил (60 хв)"
-      },
-      {
-        "@type": "Offer",
-        "position": 3,
-        "name": "Інтенсив (парні заняття)",
-        "price": "400",
-        "priceCurrency": "UAH",
-        "description": "Парне заняття протягом півтори години (90 хв)"
-      }
-    ]
+    "itemListElement": allPricingData.map((plan, index) => ({
+      "@type": "Offer",
+      "position": index + 1,
+      "name": plan.title,
+      "price": plan.price.replace(/[^0-9]/g, '') || "0",
+      "priceCurrency": "UAH",
+      "description": plan.description
+    }))
   };
 
   return (
@@ -60,80 +45,42 @@ export default function Pricing() {
         </FadeUp>
 
         <div className="pricing-grid">
-          {/* Free Trial Card */}
-          <FadeUp delay={0.1}>
-            <HoverCard className="pricing-card highlighted glass h-full">
-              <div className="card-badge">Найкращий старт</div>
-              <h3 className="card-title">Знайомство</h3>
-              <div className="card-price">Безкоштовно<span>/ 30 хв</span></div>
-              <p className="card-desc">Ідеально для того, щоб познайомитись та скласти план.</p>
-              <ul className="card-features">
-                <li>Оцінка вашого рівня</li>
-                <li>Обговорення цілей (іспит, нерозуміння правил)</li>
-                <li>Складання індивідуального плану</li>
-                <li>Відповіді на ваші запитання</li>
-              </ul>
-              <Link href="/booking" className="btn btn-primary w-full mt-auto">
-                Забронювати зараз
-              </Link>
-            </HoverCard>
-          </FadeUp>
+          {allPricingData.map((plan, index) => {
+            const isHighlighted = !!plan.badge;
+            const delay = 0.1 * (index + 1);
 
-          {/* Standard Lesson */}
-          <FadeUp delay={0.2}>
-            <HoverCard className="pricing-card glass h-full">
-              <h3 className="card-title">Індивідуальний урок з ПДР</h3>
-              <div className="card-price">250 грн<span>/ 60 хв</span></div>
-              <p className="card-desc">Повноцінне заняття з розбору правил та дорожніх ситуацій.</p>
-              <ul className="card-features">
-                <li>Онлайн або офлайн формат</li>
-                <li>Розбір складних тем (регулювальник, перехрестя)</li>
-                <li>Відповіді на ваші запитання</li>
-                <li>Аналіз реальних схем</li>
-              </ul>
-              <Link href="/booking" className="btn btn-outline w-full mt-auto">
-                Забронювати
-              </Link>
-            </HoverCard>
-          </FadeUp>
-
-          {/* Exam Prep */}
-          <FadeUp delay={0.3}>
-            <HoverCard className="pricing-card glass h-full">
-              <h3 className="card-title">Інтенсив (парні заняття)</h3>
-              <div className="card-price">400 грн<span>/ 90 хв</span></div>
-              <p className="card-desc">За 400 грн протягом півтори години ви можете займатися з партнером або будь‑ким близьким.</p>
-              <ul className="card-features">
-                <li>Розбір офіційних білетів</li>
-                <li>Симуляція іспиту</li>
-                <li>Лайфхаки для запам'ятовування</li>
-                <li>Психологічна підготовка</li>
-              </ul>
-              <Link href="/booking" className="btn btn-outline w-full mt-auto">
-                Забронювати
-              </Link>
-            </HoverCard>
-          </FadeUp>
-
-          {/* All Inclusive */}
-          <FadeUp delay={0.4}>
-            <HoverCard className="pricing-card glass h-full">
-              <h3 className="card-title">All Inclusive</h3>
-              <div className="card-price" style={{ fontSize: '1.5rem', marginTop: '1rem', marginBottom: '1.5rem' }}>
-                Скоро буде доступне
-              </div>
-              <p className="card-desc">Повний супровід від початку навчання до успішного складання іспиту в СЦ МВС.</p>
-              <ul className="card-features">
-                <li>Безлімітні консультації</li>
-                <li>Індивідуальний графік</li>
-                <li>Пріоритетне бронювання</li>
-                <li>Додаткові матеріали</li>
-              </ul>
-              <button className="btn btn-outline w-full mt-auto" disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
-                Очікується
-              </button>
-            </HoverCard>
-          </FadeUp>
+            return (
+              <FadeUp delay={delay} key={plan.id}>
+                <HoverCard className={`pricing-card glass h-full ${isHighlighted ? 'highlighted' : ''}`}>
+                  {plan.badge && <div className="card-badge">{plan.badge}</div>}
+                  <h3 className="card-title">{plan.title}</h3>
+                  <div className="card-price" style={plan.price.includes('Скоро') ? { fontSize: '1.5rem', marginTop: '1rem', marginBottom: '1.5rem' } : undefined}>
+                    {plan.price}
+                    {plan.duration && <span>{plan.duration}</span>}
+                  </div>
+                  {plan.description && <p className="card-desc">{plan.description}</p>}
+                  
+                  {plan.features && plan.features.length > 0 && (
+                    <ul className="card-features">
+                      {plan.features.map((feature, i) => (
+                        <li key={i}>{feature}</li>
+                      ))}
+                    </ul>
+                  )}
+                  
+                  {plan.disabled ? (
+                    <button className={`btn btn-${plan.buttonVariant || 'outline'} w-full mt-auto`} disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                      {plan.buttonText}
+                    </button>
+                  ) : (
+                    <Link href={plan.buttonLink || "/booking"} className={`btn btn-${plan.buttonVariant || 'outline'} w-full mt-auto`}>
+                      {plan.buttonText}
+                    </Link>
+                  )}
+                </HoverCard>
+              </FadeUp>
+            );
+          })}
         </div>
       </div>
     </div>
