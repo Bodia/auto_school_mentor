@@ -48,13 +48,15 @@ export default function Pricing() {
           {allPricingData.map((plan, index) => {
             const isHighlighted = !!plan.badge;
             const delay = 0.1 * (index + 1);
+            const isTextPrice = isNaN(parseInt(plan.price));
+            const isSoon = plan.price.includes('Скоро');
 
             return (
               <FadeUp delay={delay} key={plan.id}>
                 <HoverCard className={`pricing-card glass h-full ${isHighlighted ? 'highlighted' : ''}`}>
                   {plan.badge && <div className="card-badge">{plan.badge}</div>}
                   <h3 className="card-title">{plan.title}</h3>
-                  <div className="card-price" style={plan.price.includes('Скоро') ? { fontSize: '1.5rem', marginTop: '1rem', marginBottom: '1.5rem' } : undefined}>
+                  <div className={`card-price ${isTextPrice ? 'text-price' : ''} ${isSoon ? 'soon-price' : ''}`}>
                     {plan.price}
                     {plan.duration && <span>{plan.duration}</span>}
                   </div>
