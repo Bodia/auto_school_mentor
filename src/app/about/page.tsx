@@ -32,9 +32,9 @@ export default function About() {
           <div className="about-image-wrapper">
             <Image
               src="/instructor-about.webp"
-              alt="Індивідуальне заняття з викладачем теорії ПДР"
+              alt="Викладач теорії ПДР АвтоМентор за навчальним столом"
               width={600}
-              height={450}
+              height={800}
               className="about-image"
               priority
             />
