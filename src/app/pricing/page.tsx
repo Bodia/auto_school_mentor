@@ -53,25 +53,32 @@ export default function Pricing() {
 
             return (
               <FadeUp delay={delay} key={plan.id}>
-                <HoverCard className={`pricing-card glass h-full ${isHighlighted ? 'highlighted' : ''}`}>
+                <HoverCard className={`pricing-card glass h-full ${isHighlighted ? 'highlighted' : ''} ${plan.disabled ? 'disabled-card' : ''}`}>
+                  {plan.disabled && (
+                    <div className="card-ribbon-wrapper">
+                      <div className="card-corner-ribbon">Скоро</div>
+                    </div>
+                  )}
                   {plan.badge && <div className="card-badge">{plan.badge}</div>}
                   <h3 className="card-title">{plan.title}</h3>
-                  <div className={`card-price ${isTextPrice ? 'text-price' : ''} ${isSoon ? 'soon-price' : ''}`}>
-                    {plan.price}
-                    {plan.duration && <span>{plan.duration}</span>}
+                  <div className={plan.disabled ? 'card-body-blur' : 'card-body-normal'}>
+                    <div className={`card-price ${isTextPrice ? 'text-price' : ''} ${isSoon ? 'soon-price' : ''}`}>
+                      {plan.price}
+                      {plan.duration && <span>{plan.duration}</span>}
+                    </div>
+                    {plan.description && <p className="card-desc">{plan.description}</p>}
+                    
+                    {plan.features && plan.features.length > 0 && (
+                      <ul className="card-features">
+                        {plan.features.map((feature, i) => (
+                          <li key={i}>{feature}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  {plan.description && <p className="card-desc">{plan.description}</p>}
-                  
-                  {plan.features && plan.features.length > 0 && (
-                    <ul className="card-features">
-                      {plan.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
-                      ))}
-                    </ul>
-                  )}
                   
                   {plan.disabled ? (
-                    <button className={`btn btn-${plan.buttonVariant || 'outline'} w-full mt-auto`} disabled style={{ opacity: 0.5, cursor: 'not-allowed' }}>
+                    <button className={`btn btn-${plan.buttonVariant || 'outline'} w-full mt-auto btn-disabled-glass`} disabled>
                       {plan.buttonText}
                     </button>
                   ) : (
