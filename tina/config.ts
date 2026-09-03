@@ -18,9 +18,9 @@ export default defineConfig({
   // Proxy content API requests through Vercel rewrites to bypass antivirus
   // HTTPS scanning that corrupts Content-Encoding headers on GraphQL responses.
   // See rewrites in next.config.ts: /tina-api/* → content.tinajs.io/*
-  contentApiUrlOverride: "/tina-api",
+  contentApiUrlOverride: typeof window === "undefined" ? undefined : "/tina-api",
   tinaioConfig: {
-    contentApiUrlOverride: "/tina-api",
+    contentApiUrlOverride: typeof window === "undefined" ? undefined : "/tina-api",
   },
 
   build: {
