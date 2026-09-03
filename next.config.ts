@@ -4,8 +4,8 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
-        source: "/admin",
-        destination: "/admin/index.html",
+        source: "/mentor-panel",
+        destination: "/mentor-panel/index.html",
       },
     ];
   },

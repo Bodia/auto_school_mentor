@@ -26,7 +26,7 @@ export default defineConfig({
   },
 
   build: {
-    outputFolder: "admin",
+    outputFolder: "mentor-panel",
     publicFolder: "public",
   },
   media: {
