@@ -11,9 +11,17 @@ export default defineConfig({
   branch,
 
   // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
   // Get this from tina.io
-  token: process.env.TINA_TOKEN,
+  token: process.env.TINA_TOKEN || "",
+
+  // Proxy content API requests through Vercel rewrites to bypass antivirus
+  // HTTPS scanning that corrupts Content-Encoding headers on GraphQL responses.
+  // See rewrites in next.config.ts: /tina-api/* → content.tinajs.io/*
+  contentApiUrlOverride: "/tina-api",
+  tinaioConfig: {
+    contentApiUrlOverride: "/tina-api",
+  },
 
   build: {
     outputFolder: "admin",
