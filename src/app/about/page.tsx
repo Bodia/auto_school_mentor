@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import "./about.css";
 
@@ -28,8 +29,15 @@ export default function About() {
         <h1 className="section-title text-center">Про викладача</h1>
         
         <div className="about-content">
-          <div className="about-image-placeholder glass">
-            <span className="placeholder-text">[ Професійне фото викладача ]</span>
+          <div className="about-image-wrapper">
+            <Image
+              src="/instructor-about.webp"
+              alt="Індивідуальне заняття з викладачем теорії ПДР"
+              width={600}
+              height={450}
+              className="about-image"
+              priority
+            />
           </div>
           
           <div className="about-text">

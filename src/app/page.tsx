@@ -33,10 +33,10 @@ export default function Home() {
           <FadeUp delay={0.4}>
             <div className="hero-image-wrapper">
               <Image 
-                src="/instructor.jpg" 
-                alt="Фото викладача" 
-                width={500} 
-                height={600} 
+                src="/instructor.webp" 
+                alt="Викладач теорії ПДР АвтоМентор біля навчальної дошки" 
+                width={600} 
+                height={750} 
                 className="hero-image"
                 priority
               />
