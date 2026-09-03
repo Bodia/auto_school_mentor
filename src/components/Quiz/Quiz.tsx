@@ -24,11 +24,6 @@ export default function Quiz() {
   const [isFinished, setIsFinished] = useState(false);
   const [isStarted, setIsStarted] = useState(false);
 
-  // Initialize quiz with 10 random questions on mount
-  useEffect(() => {
-    initQuiz();
-  }, []);
-
   const initQuiz = () => {
     const shuffled = shuffleArray(quizQuestions).slice(0, 10);
     setQuestions(shuffled);
@@ -38,6 +33,12 @@ export default function Quiz() {
     setIsFinished(false);
     setIsStarted(true);
   };
+
+  // Initialize quiz with 10 random questions on client mount to prevent SSR hydration mismatch
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    initQuiz();
+  }, []);
 
   const handleOptionSelect = (index: number) => {
     if (selectedOption !== null) return; // Prevent multiple clicks

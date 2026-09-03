@@ -83,7 +83,7 @@ export default function Reviews() {
                 <div className="review-rating">
                   {"★".repeat(review.rating)}
                 </div>
-                <p className="review-text">"{review.text}"</p>
+                <p className="review-text">&ldquo;{review.text}&rdquo;</p>
               </HoverCard>
             </FadeUp>
           ))}
