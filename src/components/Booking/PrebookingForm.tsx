@@ -26,11 +26,15 @@ export default function PrebookingForm({ eventType }: PrebookingFormProps) {
     setIsSubmitting(true);
     try {
       // Save client to Tina CMS via API
-      await fetch("/api/clients", {
+      const res = await fetch("/api/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, eventType }),
       });
+      if (!res.ok) {
+        const errJson = await res.json().catch(() => ({}));
+        console.error("Failed to save client:", errJson);
+      }
     } catch (err) {
       console.error("Failed to save client data", err);
     } finally {

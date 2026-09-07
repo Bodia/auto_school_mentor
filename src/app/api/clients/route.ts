@@ -19,9 +19,8 @@ export async function POST(req: Request) {
       notes: 'Створено через форму Pre-booking',
     };
 
-    // Create a safe filename
-    const slug = name.toLowerCase().replace(/[^a-z0-9а-яієїґ]/gi, '-').replace(/-+/g, '-');
-    const fileName = `${slug}-${Date.now()}.json`;
+    // Create a safe ASCII filename
+    const fileName = `client-${Date.now()}.json`;
     const fileContent = JSON.stringify(clientData, null, 2);
 
     const githubToken = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
@@ -38,21 +37,28 @@ export async function POST(req: Request) {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${githubToken}`,
+          'Accept': 'application/vnd.github+json',
           'Content-Type': 'application/json',
           'User-Agent': 'auto-school-mentor-app',
         },
         body: JSON.stringify({
           message: `Add client ${name} from pre-booking form`,
-          content: Buffer.from(fileContent).toString('base64'),
+          content: Buffer.from(fileContent, 'utf-8').toString('base64'),
           branch: githubBranch,
         }),
       });
 
       if (!response.ok) {
-        console.error('GitHub API error:', await response.text());
-        return NextResponse.json({ error: 'Failed to save to GitHub' }, { status: 500 });
+        const errorText = await response.text();
+        console.error('GitHub API error:', response.status, errorText);
+        return NextResponse.json({ error: 'Failed to save to GitHub', details: errorText }, { status: response.status });
       }
     } else {
+      console.warn('Missing GitHub configuration environment variables on server:', {
+        hasToken: !!githubToken,
+        hasOwner: !!githubOwner,
+        hasRepo: !!githubRepo,
+      });
       // Fallback for local development
       const fs = await import('fs/promises');
       const path = await import('path');
