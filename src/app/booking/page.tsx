@@ -11,18 +11,40 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 };
 
+const eventConfig: Record<string, { slug: string; title: string }> = {
+  "30min": {
+    slug: "30min",
+    title: "Безкоштовний 30-хв урок",
+  },
+  "60min": {
+    slug: "new-meeting",
+    title: "Індивідуальний урок (60 хв)",
+  },
+  "new-meeting": {
+    slug: "new-meeting",
+    title: "Індивідуальний урок (60 хв)",
+  },
+  "90min": {
+    slug: "new-meeting-1",
+    title: "Інтенсив (парні заняття, 90 хв)",
+  },
+  "pair": {
+    slug: "new-meeting-1",
+    title: "Інтенсив (парні заняття, 90 хв)",
+  },
+  "new-meeting-1": {
+    slug: "new-meeting-1",
+    title: "Інтенсив (парні заняття, 90 хв)",
+  },
+};
+
 export default async function Booking({ searchParams }: Props) {
   const params = await searchParams;
-  const type = params?.type || "30min";
+  const rawType = (typeof params?.type === 'string' ? params.type : "30min") || "30min";
   
-  const eventTypes: Record<string, string> = {
-    "30min": "30min",
-    "60min": "60min",
-    "90min": "90min",
-  };
-  
-  const eventType = typeof type === 'string' && eventTypes[type] ? eventTypes[type] : "30min";
-  const calendlyUrl = `https://calendly.com/asusgrup24/${eventType}`;
+  const selectedEvent = eventConfig[rawType] || eventConfig["30min"];
+  const eventSlug = selectedEvent.slug;
+  const eventTitle = selectedEvent.title;
 
   return (
     <div className="booking-page section">
@@ -30,15 +52,17 @@ export default async function Booking({ searchParams }: Props) {
         <div className="text-center booking-header">
           <h1 className="section-title">Запис на заняття</h1>
           <p className="booking-subtitle">
-            Оберіть формат заняття та вільний час у календарі нижче.
+            Обраний формат: <strong>{eventTitle}</strong>. Оберіть вільний час у календарі нижче.
           </p>
-          <div className="booking-notice glass">
-            <strong>🎁 Нагадування:</strong> Перше 30-хвилинне заняття-знайомство абсолютно безкоштовне!
-          </div>
+          {rawType === "30min" && (
+            <div className="booking-notice glass">
+              <strong>🎁 Нагадування:</strong> Перше 30-хвилинне заняття-знайомство абсолютно безкоштовне!
+            </div>
+          )}
         </div>
 
         <div className="calendly-wrapper glass" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <PrebookingForm eventType={eventType} />
+          <PrebookingForm eventType={eventSlug} eventLabel={eventTitle} />
         </div>
         
         <div className="payment-notice text-center">

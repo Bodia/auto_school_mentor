@@ -5,9 +5,10 @@ import "./PrebookingForm.css"; // We'll create simple styles for it
 
 type PrebookingFormProps = {
   eventType: string;
+  eventLabel?: string;
 };
 
-export default function PrebookingForm({ eventType }: PrebookingFormProps) {
+export default function PrebookingForm({ eventType, eventLabel }: PrebookingFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ export default function PrebookingForm({ eventType }: PrebookingFormProps) {
       const res = await fetch("/api/clients", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, eventType }),
+        body: JSON.stringify({ ...formData, eventType: eventLabel || eventType }),
       });
       if (!res.ok) {
         const errJson = await res.json().catch(() => ({}));
@@ -49,8 +50,13 @@ export default function PrebookingForm({ eventType }: PrebookingFormProps) {
     const params = new URLSearchParams();
     if (formData.name) params.append("name", formData.name);
     if (formData.email) params.append("email", formData.email);
-    
-    const calendlyUrl = `https://calendly.com/asusgrup24/${eventType}?${params.toString()}`;
+    const slugMap: Record<string, string> = {
+      "60min": "new-meeting",
+      "90min": "new-meeting-1",
+      "pair": "new-meeting-1",
+    };
+    const slug = slugMap[eventType] || eventType;
+    const calendlyUrl = `https://calendly.com/asusgrup24/${slug}?${params.toString()}`;
 
     return (
       <iframe

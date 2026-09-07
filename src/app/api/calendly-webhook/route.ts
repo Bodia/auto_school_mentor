@@ -24,9 +24,8 @@ export async function POST(req: Request) {
       notes: 'Автоматично імпортовано через Calendly Webhook',
     };
 
-    // Create a safe filename
-    const slug = name.toLowerCase().replace(/[^a-z0-9а-яієїґ]/gi, '-').replace(/-+/g, '-');
-    const fileName = `${slug}-${Date.now()}.json`;
+    // Create a safe ASCII filename
+    const fileName = `client-${Date.now()}.json`;
     const fileContent = JSON.stringify(clientData, null, 2);
 
     const githubToken = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
