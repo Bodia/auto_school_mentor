@@ -39,6 +39,7 @@ export async function POST(req: Request) {
         headers: {
           'Authorization': `Bearer ${githubToken}`,
           'Content-Type': 'application/json',
+          'User-Agent': 'auto-school-mentor-app',
         },
         body: JSON.stringify({
           message: `Add client ${name} from pre-booking form`,
