@@ -54,6 +54,15 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: [
+      { url: '/icon.jpg' },
+      { url: '/favicon.ico' },
+    ],
+    apple: [
+      { url: '/apple-icon.jpg' },
+    ],
+  },
 };
 
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
