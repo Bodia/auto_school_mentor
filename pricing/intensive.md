@@ -9,7 +9,7 @@ features:
   - "Лайфхаки для запам'ятовування"
   - "Психологічна підготовка"
 buttonText: "Забронювати"
-buttonLink: "/booking"
+buttonLink: "/booking?type=90min"
 buttonVariant: "outline"
 disabled: false
 order: 3

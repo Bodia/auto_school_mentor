@@ -10,7 +10,7 @@ features:
   - "Відповіді на ваші запитання"
 badge: "Найкращий старт"
 buttonText: "Забронювати зараз"
-buttonLink: "/booking"
+buttonLink: "/booking?type=30min"
 buttonVariant: "primary"
 disabled: false
 order: 1

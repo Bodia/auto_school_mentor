@@ -9,7 +9,7 @@ features:
   - "Відповіді на ваші запитання"
   - "Аналіз реальних схем"
 buttonText: "Забронювати"
-buttonLink: "/booking"
+buttonLink: "/booking?type=60min"
 buttonVariant: "outline"
 disabled: false
 order: 2

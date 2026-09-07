@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
 import "./booking.css";
+import PrebookingForm from "@/components/Booking/PrebookingForm";
 
 export const metadata: Metadata = {
   title: "Забронювати заняття | АвтоМентор",
   description: "Оберіть зручний час для вашого індивідуального заняття з ПДР. Перший 30-хвилинний урок — безкоштовно!",
 };
 
-export default function Booking() {
+type Props = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+};
+
+export default async function Booking({ searchParams }: Props) {
+  const params = await searchParams;
+  const type = params?.type || "30min";
+  
+  const eventTypes: Record<string, string> = {
+    "30min": "30min",
+    "60min": "60min",
+    "90min": "90min",
+  };
+  
+  const eventType = typeof type === 'string' && eventTypes[type] ? eventTypes[type] : "30min";
+  const calendlyUrl = `https://calendly.com/asusgrup24/${eventType}`;
+
   return (
     <div className="booking-page section">
       <div className="container">
@@ -20,19 +37,8 @@ export default function Booking() {
           </div>
         </div>
 
-        <div className="calendly-wrapper glass">
-          {/* 
-            Замініть URL нижче на ваше реальне посилання Calendly.
-            Наприклад: https://calendly.com/ваше_імя/30min
-          */}
-          <iframe
-            src="https://calendly.com/asusgrup24/30min"
-            width="100%"
-            height="700"
-            frameBorder="0"
-            scrolling="no"
-            title="Забронювати заняття через Calendly"
-          ></iframe>
+        <div className="calendly-wrapper glass" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <PrebookingForm eventType={eventType} />
         </div>
         
         <div className="payment-notice text-center">

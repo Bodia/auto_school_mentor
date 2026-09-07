@@ -141,6 +141,55 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "clients",
+        label: "Клієнтська база",
+        path: "clients",
+        format: "json",
+        ui: {
+          allowedActions: {
+            create: true,
+            delete: true,
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "name",
+            label: "Ім'я",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "email",
+            label: "Email",
+          },
+          {
+            type: "string",
+            name: "phone",
+            label: "Номер телефону",
+          },
+          {
+            type: "string",
+            name: "event_type",
+            label: "Тариф / Урок (Тривалість)",
+          },
+          {
+            type: "datetime",
+            name: "booking_date",
+            label: "Дата бронювання",
+          },
+          {
+            type: "string",
+            name: "notes",
+            label: "Нотатки",
+            ui: {
+              component: "textarea",
+            },
+          },
+        ],
+      },
     ],
   },
 });
