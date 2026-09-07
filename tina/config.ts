@@ -193,3 +193,4 @@ export default defineConfig({
     ],
   },
 });
+// Trigger re-index
