@@ -190,6 +190,59 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "reviews",
+        label: "Відгуки учнів",
+        path: "reviews",
+        format: "md",
+        ui: {
+          allowedActions: {
+            create: true,
+            delete: true,
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "name",
+            label: "Ім'я учня",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "string",
+            name: "date",
+            label: "Дата / Період (напр. 'Серпень 2024')",
+            required: true,
+          },
+          {
+            type: "number",
+            name: "rating",
+            label: "Оцінка (від 1 до 5)",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "text",
+            label: "Текст відгуку",
+            ui: {
+              component: "textarea",
+            },
+            required: true,
+          },
+          {
+            type: "image",
+            name: "avatar",
+            label: "Фото учня (необов'язково)",
+          },
+          {
+            type: "number",
+            name: "order",
+            label: "Порядок відображення",
+            required: true,
+          },
+        ],
+      },
     ],
   },
 });

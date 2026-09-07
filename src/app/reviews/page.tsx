@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import FadeUp from "@/components/animations/FadeUp";
 import HoverCard from "@/components/animations/HoverCard";
+import { getSortedReviewsData } from "@/lib/reviews";
 import "./reviews.css";
 
 export const metadata: Metadata = {
@@ -9,54 +10,49 @@ export const metadata: Metadata = {
   description: "Дізнайтеся, що кажуть мої учні про індивідуальні заняття з ПДР та підготовку до теоретичних іспитів.",
 };
 
-const reviews = [
-  {
-    id: 1,
-    name: "Олена К.",
-    date: "Серпень 2024",
-    text: "Дуже вдячна за пояснення! Раніше тести здавалися набором незрозумілих правил, а тепер я розумію логіку кожного знаку. Здала теорію з першого разу!",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Максим В.",
-    date: "Липень 2024",
-    text: "Готувалися до теоретичного іспиту. Розібрали всі складні перехрестя і жести регулювальника, які завжди плутав. Дуже крутий підхід до навчання.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Ірина М.",
-    date: "Травень 2024",
-    text: "Завдяки вашим заняттям я нарешті вивчила ПДР. Жодного зазубрювання, все на живих прикладах і схемах. Дякую!",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "Олександр Д.",
-    date: "Квітень 2024",
-    text: "Відмінний викладач. Пояснює так, що зрозуміє навіть дитина. Особливо сподобалося, як легко ми розібрали тему проїзду перехресть.",
-    rating: 5,
-  },
-    {
-      id: 5,
-      name: "Світлана П.",
-      date: "Лютий 2024",
-      text: "Нарешті зрозуміла, як застосовувати правила в реальних ситуаціях. Тести здавав без проблем.",
-      rating: 5,
-    },
-    {
-      id: 6,
-      name: "Андрій Т.",
-      date: "Січень 2024",
-      text: "Ваш підхід до розбору ПДР робить процес навчання цікавим і легким. Ставка на практичні приклади була вірною.",
-      rating: 5,
-    },
-];
-
 export default function Reviews() {
+  const reviews = getSortedReviewsData();
+
+  // Обчислення середнього рейтингу для SEO та ШІ
+  const averageRating = reviews.length > 0
+    ? (reviews.reduce((acc, r) => acc + (r.rating || 5), 0) / reviews.length).toFixed(1)
+    : "5.0";
+
+  // Структуровані дані Schema.org для пошукових систем (Google, Bing) та ШІ (ChatGPT Search, Perplexity)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "АвтоМентор — Індивідуальні уроки ПДР",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": averageRating,
+      "reviewCount": reviews.length.toString(),
+      "bestRating": "5",
+      "worstRating": "1",
+    },
+    "review": reviews.map((r) => ({
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": r.name,
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": (r.rating || 5).toString(),
+        "bestRating": "5",
+      },
+      "reviewBody": r.text,
+    })),
+  };
+
   return (
     <div className="reviews-page section">
+      {/* Schema.org JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <div className="container">
         <FadeUp>
           <div className="text-center">
@@ -73,7 +69,12 @@ export default function Reviews() {
               <HoverCard className="review-card glass h-full">
                 <div className="review-header">
                   <div className="review-avatar">
-                    {review.name.charAt(0)}
+                    {review.avatar ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={review.avatar} alt={review.name} />
+                    ) : (
+                      review.name.charAt(0)
+                    )}
                   </div>
                   <div className="review-meta">
                     <h3 className="review-name">{review.name}</h3>
@@ -81,7 +82,7 @@ export default function Reviews() {
                   </div>
                 </div>
                 <div className="review-rating">
-                  {"★".repeat(review.rating)}
+                  {"★".repeat(review.rating || 5)}
                 </div>
                 <p className="review-text">&ldquo;{review.text}&rdquo;</p>
               </HoverCard>
