@@ -7,7 +7,7 @@
     "build": "tinacms build && next build",
     "start": "next start",
     "lint": "eslint",
-    "save": "git add . && git commit -m \"Автозбереження: оновлення коду\" && git push"
+    "save": "git add . && git commit -m \"Автозбереження: оновлення коду\" && git pull --rebase && git push"
   },
   "dependencies": {
     "@mantine/core": "^9.6.0",
