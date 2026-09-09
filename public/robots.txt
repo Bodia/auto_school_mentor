@@ -23,4 +23,4 @@ Allow: /
 User-agent: Bingbot
 Allow: /
 
-Sitemap: https://auto-school-mentor.vercel.app/sitemap.xml
+Sitemap: https://www.avtomentor.com/sitemap.xml

@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { getSortedPostsData } from '@/lib/posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://auto-school-mentor.vercel.app';
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.avtomentor.com';
 
   const posts = getSortedPostsData();
   const postUrls: MetadataRoute.Sitemap = posts.map((post) => ({
