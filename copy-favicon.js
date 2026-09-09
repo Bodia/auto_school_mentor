@@ -19,6 +19,14 @@ try {
       console.log(`Copied favicon to: ${target}`);
     });
     console.log('✅ Фавіконку (Варіант 6) успішно встановлено!');
+
+    // Встановлення банера для соцмереж (Варіант 4)
+    const ogSrc = path.join(__dirname, 'public', 'og', 'variant-4.jpg');
+    if (fs.existsSync(ogSrc)) {
+      fs.copyFileSync(ogSrc, path.join(__dirname, 'public', 'og-image.jpg'));
+      fs.copyFileSync(ogSrc, path.join(__dirname, 'src', 'app', 'opengraph-image.jpg'));
+      console.log('✅ Встановлено Варіант 4 як превʼю для соцмереж (og-image.jpg)!');
+    }
   } else {
     console.warn(`Source favicon not found at ${src}`);
   }

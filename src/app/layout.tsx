@@ -15,7 +15,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://automenter.example.com"),
+  metadataBase: new URL("https://www.avtomentor.com"),
   title: {
     template: "%s | АвтоМентор",
     default: "АвтоМентор | Професійне навчання правилам дорожнього руху (ПДР)",
@@ -32,16 +32,25 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "АвтоМентор | Професійний викладач ПДР",
-    description: "Індивідуальні заняття з ПДР онлайн. Зрозумійте правила дорожнього руху та станьте експертом теорії з АвтоМентором.",
-    url: "https://automenter.example.com",
+    description: "Індивідуальні онлайн-заняття з ПДР. Зрозумійте логіку доріг без стресу та зубріння. Перший урок — безкоштовно!",
+    url: "https://www.avtomentor.com",
     siteName: "АвтоМентор",
     locale: "uk_UA",
     type: "website",
+    images: [
+      {
+        url: "/og/variant-4.jpg",
+        width: 1200,
+        height: 630,
+        alt: "АвтоМентор — Твій персональний наставник з ПДР",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "АвтоМентор | Професійний викладач ПДР",
-    description: "Індивідуальні заняття з ПДР. Перший безкоштовний урок!",
+    description: "Індивідуальні онлайн-заняття з ПДР. Перший безкоштовний урок!",
+    images: ["/og/variant-4.jpg"],
   },
   robots: {
     index: true,
@@ -81,8 +90,9 @@ export default function RootLayout({
     "@type": "EducationalOrganization",
     "name": "АвтоМентор",
     "description": "Професійне індивідуальне навчання правилам дорожнього руху (ПДР) онлайн.",
-    "url": "https://automenter.example.com",
-    "logo": "https://automenter.example.com/favicon.ico",
+    "url": "https://www.avtomentor.com",
+    "logo": "https://www.avtomentor.com/icon.jpg",
+    "image": "https://www.avtomentor.com/og/variant-4.jpg",
     "foundingLocation": {
       "@type": "Place",
       "address": {
