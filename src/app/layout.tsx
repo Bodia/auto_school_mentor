@@ -65,11 +65,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.jpg' },
-      { url: '/favicon.ico' },
+      { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
     ],
     apple: [
-      { url: '/apple-icon.jpg' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
 };
@@ -91,7 +91,7 @@ export default function RootLayout({
     "name": "АвтоМентор",
     "description": "Професійне індивідуальне навчання правилам дорожнього руху (ПДР) онлайн.",
     "url": "https://www.avtomentor.com",
-    "logo": "https://www.avtomentor.com/icon.jpg",
+    "logo": "https://www.avtomentor.com/icon.png",
     "image": "https://www.avtomentor.com/og/variant-4.jpg",
     "foundingLocation": {
       "@type": "Place",
