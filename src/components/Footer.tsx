@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import './Footer.css';
 
 export default function Footer() {
@@ -7,7 +8,16 @@ export default function Footer() {
       <div className="container footer-container">
         <div className="footer-brand">
           <Link href="/" className="logo">
-            Авто<span>Ментор</span>
+            <span className="logo-icon">
+              <Image
+                src="/icon.png"
+                alt="АвтоМентор логотип"
+                width={36}
+                height={36}
+                className="logo-img"
+              />
+            </span>
+            <span className="logo-text">Авто<span>Ментор</span></span>
           </Link>
           <p className="footer-desc">
             Професійне навчання правилам дорожнього руху з індивідуальним підходом.

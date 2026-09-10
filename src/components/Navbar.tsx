@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import './Navbar.css';
 
 export default function Navbar() {
@@ -41,7 +42,17 @@ export default function Navbar() {
       <header className="navbar glass">
         <div className="container nav-container">
           <Link href="/" className="logo" onClick={closeMenu}>
-            Авто<span>Ментор</span>
+            <span className="logo-icon">
+              <Image
+                src="/icon.png"
+                alt="АвтоМентор логотип"
+                width={36}
+                height={36}
+                priority
+                className="logo-img"
+              />
+            </span>
+            <span className="logo-text">Авто<span>Ментор</span></span>
           </Link>
 
           {/* Burger button */}
@@ -83,18 +94,31 @@ export default function Navbar() {
 
       {/* Side Drawer (slides in from the right) */}
       <div className={`mobile-drawer ${isOpen ? 'active' : ''}`} aria-hidden={!isOpen}>
-        
-        {/* Close button inside drawer */}
-        <button 
-          className="drawer-close-btn" 
-          onClick={closeMenu}
-          aria-label="Закрити меню"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+        <div className="drawer-header">
+          <Link href="/" className="logo" onClick={closeMenu}>
+            <span className="logo-icon">
+              <Image
+                src="/icon.png"
+                alt="АвтоМентор логотип"
+                width={32}
+                height={32}
+                className="logo-img"
+              />
+            </span>
+            <span className="logo-text">Авто<span>Ментор</span></span>
+          </Link>
+          {/* Close button inside drawer */}
+          <button 
+            className="drawer-close-btn" 
+            onClick={closeMenu}
+            aria-label="Закрити меню"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
 
         <nav className="mobile-nav">
           <Link href="/about" onClick={closeMenu}>Про мене</Link>

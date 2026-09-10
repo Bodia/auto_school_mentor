@@ -107,6 +107,7 @@ async function generateFavicons() {
     { file: path.join(__dirname, 'public', 'favicon.ico'), data: classicIco },
     { file: path.join(__dirname, 'public', 'icon.png'), data: png192 },
     { file: path.join(__dirname, 'public', 'icon-512.png'), data: png512 },
+    { file: path.join(__dirname, 'public', 'logo.png'), data: png512 },
     { file: path.join(__dirname, 'public', 'apple-touch-icon.png'), data: appleTouch },
   ];
 

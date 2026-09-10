@@ -63,11 +63,14 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  manifest: "/manifest.json",
   icons: {
     icon: [
       { url: '/icon.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
       { url: '/favicon.ico', sizes: '48x48', type: 'image/x-icon' },
     ],
+    shortcut: ['/favicon.ico'],
     apple: [
       { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
@@ -89,9 +92,16 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
     "name": "АвтоМентор",
+    "alternateName": ["AvtoMentor", "Авто Ментор"],
     "description": "Професійне індивідуальне навчання правилам дорожнього руху (ПДР) онлайн.",
     "url": "https://www.avtomentor.com",
-    "logo": "https://www.avtomentor.com/icon.png",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.avtomentor.com/icon.png",
+      "width": 192,
+      "height": 192,
+      "caption": "АвтоМентор логотип"
+    },
     "image": "https://www.avtomentor.com/og/variant-4.jpg",
     "foundingLocation": {
       "@type": "Place",
@@ -112,6 +122,10 @@ export default function RootLayout({
     <html lang="uk" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
+        <link rel="icon" href="/icon.png" sizes="192x192" type="image/png" />
+        <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
       </head>
       <body className={`${inter.variable} ${outfit.variable}`}>
         <MantineProvider defaultColorScheme="auto">
