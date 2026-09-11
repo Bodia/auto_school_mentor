@@ -2,10 +2,12 @@ import { defineConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
-  process.env.GITHUB_BRANCH ||
+  process.env.NEXT_PUBLIC_TINA_BRANCH ||
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF ||
   process.env.VERCEL_GIT_COMMIT_REF ||
+  process.env.GITHUB_BRANCH ||
   process.env.HEAD ||
-  "main";
+  "dev";
 
 export default defineConfig({
   branch,
@@ -14,16 +16,6 @@ export default defineConfig({
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "",
   // Get this from tina.io
   token: process.env.TINA_TOKEN || "",
-
-  // Proxy content API requests through Vercel rewrites to bypass antivirus
-  // HTTPS scanning that corrupts Content-Encoding headers on GraphQL responses.
-  // See rewrites in next.config.ts: /tina-api/* → content.tinajs.io/*
-  contentApiUrlOverride: typeof window === "undefined" 
-    ? undefined 
-    : `/tina-api/1.4/content/${process.env.NEXT_PUBLIC_TINA_CLIENT_ID || ""}/github/${branch}`,
-  tinaioConfig: {
-    contentApiUrlOverride: typeof window === "undefined" ? undefined : "/tina-api",
-  },
 
   build: {
     outputFolder: "mentor-panel",
@@ -259,6 +251,7 @@ export default defineConfig({
             type: "string",
             name: "phone",
             label: "Основний номер телефону (напр. +38 (097) 123-45-67)",
+            isTitle: true,
             required: true,
           },
           {
