@@ -147,6 +147,7 @@ export default function RootLayout({
             gtag('js', new Date());
 
             gtag('config', 'G-DJSKSKKJWX');
+            gtag('config', 'AW-8730172184');
           `}
         </Script>
         <MantineProvider defaultColorScheme="auto">
