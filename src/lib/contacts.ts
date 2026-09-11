@@ -1,5 +1,4 @@
-import fs from 'fs';
-import path from 'path';
+import contactsJson from '../../settings/contacts.json';
 
 export interface SocialLinks {
   telegram?: string;
@@ -38,33 +37,24 @@ export const defaultContacts: ContactsData = {
 };
 
 /**
- * Reads contacts data from settings/contacts.json.
- * Falls back safely to defaultContacts if file is missing or invalid.
+ * Returns contacts data from settings/contacts.json.
+ * Uses static JSON import so it is completely browser-safe and can be used
+ * in both Client Components and Server Components without Node 'fs' dependency.
  */
 export function getContactsData(): ContactsData {
-  try {
-    const filePath = path.join(process.cwd(), 'settings', 'contacts.json');
-    if (!fs.existsSync(filePath)) {
-      return defaultContacts;
-    }
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const parsed = JSON.parse(fileContent);
+  const data = (contactsJson || {}) as Partial<ContactsData>;
 
-    return {
-      phone: parsed.phone || defaultContacts.phone,
-      phoneSecondary: parsed.phoneSecondary || '',
-      email: parsed.email || defaultContacts.email,
-      address: parsed.address || defaultContacts.address,
-      workingHours: parsed.workingHours || defaultContacts.workingHours,
-      socials: {
-        ...defaultContacts.socials,
-        ...(parsed.socials || {}),
-      },
-    };
-  } catch (error) {
-    console.error('Помилка при читанні контактів:', error);
-    return defaultContacts;
-  }
+  return {
+    phone: data.phone || defaultContacts.phone,
+    phoneSecondary: data.phoneSecondary || '',
+    email: data.email || defaultContacts.email,
+    address: data.address || defaultContacts.address,
+    workingHours: data.workingHours || defaultContacts.workingHours,
+    socials: {
+      ...defaultContacts.socials,
+      ...(data.socials || {}),
+    },
+  };
 }
 
 /**
