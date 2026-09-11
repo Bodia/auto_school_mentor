@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     const githubToken = process.env.GITHUB_PERSONAL_ACCESS_TOKEN;
     const githubOwner = process.env.GITHUB_OWNER;
     const githubRepo = process.env.GITHUB_REPO;
-    const githubBranch = process.env.GITHUB_BRANCH || 'main';
+    const githubBranch = process.env.VERCEL_GIT_COMMIT_REF || process.env.GITHUB_BRANCH || 'main';
 
     if (githubToken && githubOwner && githubRepo) {
       // Push directly to GitHub (for production)

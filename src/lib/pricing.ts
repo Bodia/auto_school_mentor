@@ -22,7 +22,9 @@ export type PricingPlan = {
 export function getSortedPricingData(): PricingPlan[] {
   if (!fs.existsSync(pricingDirectory)) return [];
   const fileNames = fs.readdirSync(pricingDirectory);
-  const allPricingData = fileNames.map((fileName) => {
+  const allPricingData = fileNames
+    .filter((fileName) => fileName.endsWith('.md'))
+    .map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
     const fullPath = path.join(pricingDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');

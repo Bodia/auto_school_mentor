@@ -33,8 +33,34 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
     notFound();
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: postData.title,
+    description: postData.description || postData.title,
+    datePublished: postData.date,
+    author: {
+      '@type': 'Organization',
+      name: 'АвтоМентор',
+      url: 'https://auto-mentor.com.ua',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'АвтоМентор',
+      url: 'https://auto-mentor.com.ua',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://auto-mentor.com.ua/blog/${resolvedParams.slug}`,
+    },
+  };
+
   return (
     <div className="section">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <div>
         <div className="container" style={{maxWidth: "1000px"}}>
             <Link href="/blog" className="back-link">

@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
 import "./globals.css";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AmbientBackground from "@/components/animations/AmbientBackground";
+import { getContactsData, getActiveSocials } from "@/lib/contacts";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -77,12 +82,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import '@mantine/core/styles.css';
-
-import AmbientBackground from "@/components/animations/AmbientBackground";
-import { getContactsData, getActiveSocials } from "@/lib/contacts";
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -130,10 +129,6 @@ export default function RootLayout({
     <html lang="uk" suppressHydrationWarning>
       <head>
         <ColorSchemeScript />
-        <link rel="icon" href="/icon.png" sizes="192x192" type="image/png" />
-        <link rel="icon" href="/favicon.ico" sizes="48x48" type="image/x-icon" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
       </head>
       <body className={`${inter.variable} ${outfit.variable}`}>
         <MantineProvider defaultColorScheme="auto">
