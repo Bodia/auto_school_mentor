@@ -243,6 +243,89 @@ export default defineConfig({
           },
         ],
       },
+      {
+        name: "settings",
+        label: "Контакти та соцмережі",
+        path: "settings",
+        format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
+        fields: [
+          {
+            type: "string",
+            name: "phone",
+            label: "Основний номер телефону (напр. +38 (097) 123-45-67)",
+            required: true,
+          },
+          {
+            type: "string",
+            name: "phoneSecondary",
+            label: "Додатковий номер телефону (необов'язково)",
+          },
+          {
+            type: "string",
+            name: "email",
+            label: "Контактний Email (електронна пошта)",
+            description: "Електронна пошта для зв'язку (відображається в підвалі, шапці та мікророзмітці)",
+          },
+          {
+            type: "string",
+            name: "address",
+            label: "Місто / Формат (напр. Онлайн по всій Україні / м. Київ)",
+          },
+          {
+            type: "string",
+            name: "workingHours",
+            label: "Години консультацій (напр. Пн-Нд: 08:00 — 21:00)",
+          },
+          {
+            type: "object",
+            name: "socials",
+            label: "Соціальні мережі та месенджери",
+            fields: [
+              {
+                type: "string",
+                name: "telegram",
+                label: "Telegram (посилання або @username)",
+              },
+              {
+                type: "string",
+                name: "viber",
+                label: "Viber (номер телефону або посилання)",
+              },
+              {
+                type: "string",
+                name: "instagram",
+                label: "Instagram (посилання або @username)",
+              },
+              {
+                type: "string",
+                name: "whatsapp",
+                label: "WhatsApp (номер телефону або посилання)",
+              },
+              {
+                type: "string",
+                name: "youtube",
+                label: "YouTube (посилання на канал)",
+              },
+              {
+                type: "string",
+                name: "tiktok",
+                label: "TikTok (посилання або @username)",
+              },
+              {
+                type: "string",
+                name: "facebook",
+                label: "Facebook (посилання)",
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
 });

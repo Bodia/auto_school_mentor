@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { getContactsData, formatPhoneForTel, getActiveSocials } from "@/lib/contacts";
+import { PhoneIcon } from "@/components/SocialIcons";
 import "./about.css";
 
 export const metadata: Metadata = {
@@ -9,14 +11,19 @@ export const metadata: Metadata = {
 };
 
 export default function About() {
+  const contacts = getContactsData();
+  const activeSocials = getActiveSocials(contacts.socials);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "АвтоМентор",
     "jobTitle": "Сертифікований викладач ПДР",
     "description": "Сертифікований викладач з індивідуального вивчення теорії ПДР. Понад 20 років досвіду.",
-    "url": "https://automenter.example.com/about",
-    "sameAs": []
+    "url": "https://www.avtomentor.com/about",
+    "telephone": contacts.phone,
+    "email": contacts.email,
+    "sameAs": activeSocials.map((s) => s.url),
   };
 
   return (
@@ -55,9 +62,9 @@ export default function About() {
                 <div className="stat-label">Років викладання</div>
               </div>
               <div className="stat-card glass">
-          <div className="stat-number">3000+</div>
-          <div className="stat-label">Успішних учнів</div>
-        </div>
+                <div className="stat-number">3000+</div>
+                <div className="stat-label">Успішних учнів</div>
+              </div>
               <div className="stat-card glass">
                 <div className="stat-number">100%</div>
                 <div className="stat-label">Індивідуальний підхід</div>
@@ -68,6 +75,16 @@ export default function About() {
               <Link href="/booking" className="btn btn-primary">
                 Познайомитись на безкоштовному уроці
               </Link>
+              {contacts.phone && (
+                <a
+                  href={`tel:${formatPhoneForTel(contacts.phone)}`}
+                  className="btn btn-outline about-phone-btn"
+                  title="Зателефонувати зараз"
+                >
+                  <PhoneIcon size={18} />
+                  <span>{contacts.phone}</span>
+                </a>
+              )}
             </div>
           </div>
         </div>

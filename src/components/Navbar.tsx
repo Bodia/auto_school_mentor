@@ -2,12 +2,20 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
+import { ContactsData, defaultContacts, formatPhoneForTel, getActiveSocials } from '@/lib/contacts';
+import { PhoneIcon, MailIcon, renderSocialIcon } from './SocialIcons';
 import './Navbar.css';
 
-export default function Navbar() {
+type NavbarProps = {
+  contacts?: ContactsData;
+};
+
+export default function Navbar({ contacts: propContacts }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const scrollY = useRef(0);
+
+  const contacts = propContacts || defaultContacts;
+  const activeSocials = getActiveSocials(contacts.socials);
 
   useEffect(() => {
     if (isOpen) {
@@ -42,16 +50,6 @@ export default function Navbar() {
       <header className="navbar glass">
         <div className="container nav-container">
           <Link href="/" className="logo" onClick={closeMenu}>
-            <span className="logo-icon">
-              <Image
-                src="/icon.png"
-                alt="АвтоМентор логотип"
-                width={36}
-                height={36}
-                priority
-                className="logo-img"
-              />
-            </span>
             <span className="logo-text">Авто<span>Ментор</span></span>
           </Link>
 
@@ -77,7 +75,19 @@ export default function Navbar() {
             <Link href="/quiz" className="highlight-link">Пройти тест</Link>
           </nav>
 
-          <div className="nav-cta desktop-only">
+          <div className="nav-actions desktop-only">
+            {contacts.phone && (
+              <a
+                href={`tel:${formatPhoneForTel(contacts.phone)}`}
+                className="nav-phone-link"
+                title="Зателефонувати зараз"
+              >
+                <span className="nav-phone-icon">
+                  <PhoneIcon size={16} />
+                </span>
+                <span className="nav-phone-number">{contacts.phone}</span>
+              </a>
+            )}
             <Link href="/booking" className="btn btn-primary">
               Безкоштовний урок
             </Link>
@@ -96,15 +106,6 @@ export default function Navbar() {
       <div className={`mobile-drawer ${isOpen ? 'active' : ''}`} aria-hidden={!isOpen}>
         <div className="drawer-header">
           <Link href="/" className="logo" onClick={closeMenu}>
-            <span className="logo-icon">
-              <Image
-                src="/icon.png"
-                alt="АвтоМентор логотип"
-                width={32}
-                height={32}
-                className="logo-img"
-              />
-            </span>
             <span className="logo-text">Авто<span>Ментор</span></span>
           </Link>
           {/* Close button inside drawer */}
@@ -128,10 +129,56 @@ export default function Navbar() {
           <Link href="/quiz" onClick={closeMenu} className="highlight-link">Пройти тест</Link>
 
           <div className="mobile-nav-cta">
+            {contacts.phone && (
+              <a
+                href={`tel:${formatPhoneForTel(contacts.phone)}`}
+                className="btn btn-phone-call"
+                onClick={closeMenu}
+                title="Зателефонувати зараз"
+              >
+                <PhoneIcon size={18} />
+                <span>Зателефонувати: {contacts.phone}</span>
+              </a>
+            )}
             <Link href="/booking" className="btn btn-primary" onClick={closeMenu}>
               Безкоштовний урок
             </Link>
           </div>
+
+          {activeSocials.length > 0 && (
+            <div className="mobile-drawer-socials">
+              <span className="mobile-socials-title">Написати у месенджер:</span>
+              <div className="mobile-socials-grid">
+                {activeSocials.map((social) => (
+                  <a
+                    key={social.key}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`mobile-social-badge social-${social.key}`}
+                    title={social.name}
+                    aria-label={social.name}
+                  >
+                    {renderSocialIcon(social.key, 20)}
+                    <span>{social.name}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {contacts.email && (
+            <div className="mobile-drawer-email">
+              <a
+                href={`mailto:${contacts.email}`}
+                className="drawer-email-link"
+                title="Написати на Email"
+              >
+                <MailIcon size={16} />
+                <span>{contacts.email}</span>
+              </a>
+            </div>
+          )}
         </nav>
       </div>
     </>

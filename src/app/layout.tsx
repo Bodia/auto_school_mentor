@@ -81,12 +81,17 @@ import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 
 import AmbientBackground from "@/components/animations/AmbientBackground";
+import { getContactsData, getActiveSocials } from "@/lib/contacts";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const contacts = getContactsData();
+  const activeSocials = getActiveSocials(contacts.socials);
+  const socialUrls = activeSocials.map((s) => s.url);
+
   // Structured Data for AI bots (ChatGPT, Gemini, Google Search)
   const jsonLd = {
     "@context": "https://schema.org",
@@ -95,6 +100,9 @@ export default function RootLayout({
     "alternateName": ["AvtoMentor", "Авто Ментор"],
     "description": "Професійне індивідуальне навчання правилам дорожнього руху (ПДР) онлайн.",
     "url": "https://www.avtomentor.com",
+    "telephone": contacts.phone,
+    "email": contacts.email,
+    "sameAs": socialUrls,
     "logo": {
       "@type": "ImageObject",
       "url": "https://www.avtomentor.com/icon.png",
@@ -134,9 +142,9 @@ export default function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
           <AmbientBackground />
-          <Navbar />
+          <Navbar contacts={contacts} />
           <main>{children}</main>
-          <Footer />
+          <Footer contacts={contacts} />
         </MantineProvider>
       </body>
     </html>

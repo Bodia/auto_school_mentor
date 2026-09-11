@@ -71,6 +71,18 @@
 
 .about-cta {
   margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.about-phone-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 @media (max-width: 992px) {
@@ -108,6 +120,6 @@
   }
   
   .about-cta {
-    text-align: center;
+    justify-content: center;
   }
 }
