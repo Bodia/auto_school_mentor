@@ -39,6 +39,14 @@ export default function PrebookingForm({ eventType, eventLabel }: PrebookingForm
     } catch (err) {
       console.error("Failed to save client data", err);
     } finally {
+      // Track conversion in Google Analytics
+      if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag === "function") {
+        (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", "generate_lead", {
+          event_category: "Booking",
+          event_label: eventLabel || eventType,
+        });
+      }
+
       // Even if saving fails, we should let them book the lesson!
       setIsSubmitted(true);
       setIsSubmitting(false);
@@ -74,7 +82,7 @@ export default function PrebookingForm({ eventType, eventLabel }: PrebookingForm
     <form className="prebooking-form" onSubmit={handleSubmit}>
       <h2>Крок 1: Ваші контактні дані</h2>
       <p>Будь ласка, заповніть форму нижче, щоб перейти до вибору часу в календарі.</p>
-      
+
       <div className="form-group">
         <label htmlFor="name">Ім'я та Прізвище *</label>
         <input

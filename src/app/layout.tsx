@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Outfit } from "next/font/google";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -131,6 +132,23 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className={`${inter.variable} ${outfit.variable}`}>
+        {/* Google tag (gtag.js) */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-DJSKSKKJWX"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+        >
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-DJSKSKKJWX');
+          `}
+        </Script>
         <MantineProvider defaultColorScheme="auto">
           <script
             type="application/ld+json"

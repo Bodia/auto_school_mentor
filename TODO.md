@@ -32,6 +32,6 @@
    - Додавання сайту в **Bing Webmaster Tools** (критично для того, щоб сайт бачив ChatGPT Search і Copilot).
 
 4. **Підготовка до запуску платної реклами (Google Ads / Facebook Ads)**:
-   - Встановлення Google Tag / Google Analytics 4 (GA4).
-   - Встановлення Meta Pixel (Facebook Pixel).
-   - Налаштування відстеження конверсій (подія успішного заповнення форми попереднього запису та переходу в Calendly).
+   - [x] Встановлення Google Tag / Google Analytics 4 (GA4 ID: `G-DJSKSKKJWX`) у `src/app/layout.tsx`.
+   - [ ] Встановлення Meta Pixel (Facebook Pixel).
+   - [x] Налаштування відстеження конверсій (подія `generate_lead` при заповненні форми попереднього запису `PrebookingForm.tsx`).
