@@ -39,11 +39,15 @@ export default function PrebookingForm({ eventType, eventLabel }: PrebookingForm
     } catch (err) {
       console.error("Failed to save client data", err);
     } finally {
-      // Track conversion in Google Analytics
+      // Track conversion in Google Analytics & Google Ads
       if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag === "function") {
-        (window as unknown as { gtag: (...args: unknown[]) => void }).gtag("event", "generate_lead", {
+        const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
+        gtag("event", "generate_lead", {
           event_category: "Booking",
           event_label: eventLabel || eventType,
+        });
+        gtag("event", "conversion_event_page_view", {
+          send_to: "AW-8730172184",
         });
       }
 
