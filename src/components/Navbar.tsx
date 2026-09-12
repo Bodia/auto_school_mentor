@@ -136,8 +136,13 @@ export default function Navbar({ contacts: propContacts }: NavbarProps) {
                 onClick={closeMenu}
                 title="Зателефонувати зараз"
               >
-                <PhoneIcon size={18} />
-                <span>Зателефонувати: {contacts.phone}</span>
+                <span className="btn-phone-icon-wrapper">
+                  <PhoneIcon size={18} />
+                </span>
+                <span className="btn-phone-text">
+                  <span className="btn-phone-label">Зателефонувати</span>
+                  <span className="btn-phone-number">{contacts.phone}</span>
+                </span>
               </a>
             )}
             <Link href="/booking" className="btn btn-primary" onClick={closeMenu}>
