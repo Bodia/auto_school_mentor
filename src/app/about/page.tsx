@@ -6,7 +6,7 @@ import { PhoneIcon } from "@/components/SocialIcons";
 import "./about.css";
 
 export const metadata: Metadata = {
-  title: "Про мене | АвтоМентор",
+  title: "Про мене",
   description: "Дізнайтеся більше про мій досвід, ліцензії та підхід до вивчення теорії ПДР.",
 };
 

@@ -1,60 +1,124 @@
 .prebooking-form {
-  max-width: 500px;
+  max-width: 520px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   text-align: left;
 }
 
 .prebooking-form h2 {
   margin-bottom: 0.5rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .prebooking-form p {
-  margin-bottom: 1.5rem;
-  color: var(--text-color-muted);
+  margin-bottom: 1.75rem;
+  color: var(--text-alt);
+  font-size: 0.95rem;
+  line-height: 1.5;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
 }
 
 .form-group input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: inherit;
-  font-family: inherit;
+  padding: 0.85rem 1rem;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: var(--font-sans);
   font-size: 1rem;
-  transition: border-color 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.form-group input::placeholder {
+  color: var(--text-alt);
+  opacity: 0.65;
 }
 
 .form-group input:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.18);
 }
 
 .prebooking-form .btn {
   width: 100%;
   padding: 1rem;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  margin-top: 0.5rem;
 }
 
 .prebooking-form .btn:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
+
+.calendly-container {
+  width: 100%;
+  min-width: 320px;
+  height: 700px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.calendly-iframe {
+  width: 100%;
+  height: 700px;
+  min-height: 700px;
+  border: none;
+  border-radius: 16px;
+  display: block;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+@media (max-width: 768px) {
+  .calendly-container {
+    height: 700px;
+    min-height: 700px;
+    width: 100%;
+  }
+
+  .calendly-iframe {
+    height: 700px !important;
+    min-height: 700px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .prebooking-form {
+    padding: 1.75rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .prebooking-form h2 {
+    font-size: 1.35rem;
+  }
+}
+

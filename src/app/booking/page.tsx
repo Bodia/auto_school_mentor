@@ -3,7 +3,7 @@ import "./booking.css";
 import PrebookingForm from "@/components/Booking/PrebookingForm";
 
 export const metadata: Metadata = {
-  title: "Забронювати заняття | АвтоМентор",
+  title: "Забронювати заняття",
   description: "Оберіть зручний час для вашого індивідуального заняття з ПДР. Перший 30-хвилинний урок — безкоштовно!",
 };
 
@@ -61,7 +61,7 @@ export default async function Booking({ searchParams }: Props) {
           )}
         </div>
 
-        <div className="calendly-wrapper glass" style={{ minHeight: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="calendly-wrapper">
           <PrebookingForm eventType={eventSlug} eventLabel={eventTitle} />
         </div>
         

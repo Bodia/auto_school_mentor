@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./PrebookingForm.css"; // We'll create simple styles for it
 
 type PrebookingFormProps = {
@@ -11,11 +11,34 @@ type PrebookingFormProps = {
 export default function PrebookingForm({ eventType, eventLabel }: PrebookingFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
   });
+
+  useEffect(() => {
+    if (isSubmitted && containerRef.current) {
+      containerRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [isSubmitted]);
+
+  useEffect(() => {
+    const handleMessage = (e: MessageEvent) => {
+      if (e.origin?.includes("calendly.com") && e.data?.event === "calendly.event_scheduled") {
+        if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag === "function") {
+          const gtag = (window as unknown as { gtag: (...args: unknown[]) => void }).gtag;
+          gtag("event", "booking_completed", {
+            event_category: "Booking",
+            event_label: eventLabel || eventType,
+          });
+        }
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [eventLabel, eventType]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -45,9 +68,12 @@ export default function PrebookingForm({ eventType, eventLabel }: PrebookingForm
         gtag("event", "generate_lead", {
           event_category: "Booking",
           event_label: eventLabel || eventType,
-        });
-        gtag("event", "conversion_event_page_view", {
           send_to: "AW-8730172184",
+        });
+        gtag("event", "conversion", {
+          send_to: "AW-8730172184",
+          event_category: "Booking",
+          event_label: eventLabel || eventType,
         });
       }
 
@@ -62,6 +88,10 @@ export default function PrebookingForm({ eventType, eventLabel }: PrebookingForm
     const params = new URLSearchParams();
     if (formData.name) params.append("name", formData.name);
     if (formData.email) params.append("email", formData.email);
+    params.append("embed_type", "Inline");
+    if (typeof window !== "undefined") {
+      params.append("embed_domain", window.location.hostname);
+    }
     const slugMap: Record<string, string> = {
       "60min": "new-meeting",
       "90min": "new-meeting-1",
@@ -71,14 +101,16 @@ export default function PrebookingForm({ eventType, eventLabel }: PrebookingForm
     const calendlyUrl = `https://calendly.com/asusgrup24/${slug}?${params.toString()}`;
 
     return (
-      <iframe
-        src={calendlyUrl}
-        width="100%"
-        height="700"
-        frameBorder="0"
-        scrolling="no"
-        title="Забронювати заняття через Calendly"
-      ></iframe>
+      <div ref={containerRef} className="calendly-container">
+        <iframe
+          src={calendlyUrl}
+          className="calendly-iframe"
+          width="100%"
+          height="700"
+          scrolling="yes"
+          title="Забронювати заняття через Calendly"
+        ></iframe>
+      </div>
     );
   }
 

@@ -6,7 +6,7 @@ import { getSortedReviewsData } from "@/lib/reviews";
 import "./reviews.css";
 
 export const metadata: Metadata = {
-  title: "Відгуки учнів | АвтоМентор",
+  title: "Відгуки учнів",
   description: "Дізнайтеся, що кажуть мої учні про індивідуальні заняття з ПДР та підготовку до теоретичних іспитів.",
 };
 

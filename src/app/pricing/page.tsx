@@ -6,7 +6,7 @@ import { getSortedPricingData } from "@/lib/pricing";
 import "./pricing.css";
 
 export const metadata: Metadata = {
-  title: "Послуги та ціни | АвтоМентор",
+  title: "Послуги та ціни",
   description: "Ознайомтеся з форматами занять з ПДР. Перше заняття-знайомство (30 хв) — безкоштовно!",
 };
 

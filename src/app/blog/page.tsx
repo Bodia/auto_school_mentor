@@ -4,7 +4,7 @@ import { getSortedPostsData } from "@/lib/posts";
 import "./blog.css";
 
 export const metadata: Metadata = {
-  title: "Блог про ПДР | АвтоМентор",
+  title: "Блог про ПДР",
   description: "Корисні поради, розбір ПДР та секрети успішного складання іспитів.",
 };
 

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   }
 
   return {
-    title: `${postData.title} | Блог АвтоМентор`,
+    title: postData.title,
     description: postData.description,
   };
 }
@@ -42,16 +42,16 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
     author: {
       '@type': 'Organization',
       name: 'АвтоМентор',
-      url: 'https://auto-mentor.com.ua',
+      url: 'https://www.avtomentor.com',
     },
     publisher: {
       '@type': 'Organization',
       name: 'АвтоМентор',
-      url: 'https://auto-mentor.com.ua',
+      url: 'https://www.avtomentor.com',
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://auto-mentor.com.ua/blog/${resolvedParams.slug}`,
+      '@id': `https://www.avtomentor.com/blog/${resolvedParams.slug}`,
     },
   };
 

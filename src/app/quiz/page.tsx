@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Quiz from "@/components/Quiz/Quiz";
 
 export const metadata: Metadata = {
-  title: "Перевір свої знання ПДР | АвтоМентор",
+  title: "Перевір свої знання ПДР",
   description: "Пройди короткий тест з 10 найкаверзніших питань ПДР, щоб дізнатися свій рівень перед іспитом.",
 };
 

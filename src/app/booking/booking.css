@@ -22,10 +22,19 @@
 
 .calendly-wrapper {
   max-width: 1000px;
+  width: 100%;
   margin: 0 auto 3rem;
   border-radius: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  position: relative;
 }
 
 .payment-notice {
@@ -35,7 +44,6 @@
   margin: 0 auto;
 }
 
-
 @media (max-width: 768px) {
   .booking-subtitle {
     margin-bottom: 2rem;
@@ -44,7 +52,14 @@
     padding: 1rem;
     font-size: 0.9rem;
   }
+  .calendly-wrapper {
+    border-radius: 16px;
+    margin-bottom: 2rem;
+  }
   .calendly-wrapper iframe {
-    height: 900px !important;
+    height: 700px !important;
+    min-height: 700px !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
   }
 }
